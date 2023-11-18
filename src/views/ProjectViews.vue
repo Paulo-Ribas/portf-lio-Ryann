@@ -47,6 +47,12 @@ export default {
             {name: 'musiQo', img: '../assets/img/project4/1.png', number: '1'},
             {name: 'lanches budega', img: '../assets/img/project5/1.png', number: '1'},  
             {name: 'BarberShop', img: '../assets/img/project6/1.png', number: '1'},
+            {name: 'Beth', img: '../assets/img/project7/1.png', number: '1'},
+            {name: 'Melissa', img: '../assets/img/project8/1.png', number: '1'},
+            {name: 'ryanng', img: '../assets/img/project9/1.png', number: '1'},
+            {name: 'Amigitos', img: '../assets/img/project10/3.png', number: '3'},
+            {name: 'Musicas', img: '../assets/img/project11/3.png', number: '3'},            
+            
         ],
         
         }

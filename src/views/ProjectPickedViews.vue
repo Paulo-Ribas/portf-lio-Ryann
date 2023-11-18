@@ -80,6 +80,28 @@ export default {
                     projectArray = ['project6/1.png', 'project6/2.png', 'project6/3.png', 'project6/4.png', 'project6/5.png']
                     this.projectImg = new URL(`../assets/img/project6/${param}.png`, import.meta.url).href
                     break;
+                case 'Beth':
+                    projectArray = ['project7/1.png', 'project7/2.png', 'project7/3.png', 'project7/4.png']
+                    this.projectImg = new URL(`../assets/img/project7/${param}.png`, import.meta.url).href
+                    break;
+                case 'Melissa':
+                    projectArray = ['project8/1.png', 'project8/2.png', 'project8/3.png']
+                    this.projectImg = new URL(`../assets/img/project8/${param}.png`, import.meta.url).href
+                    break;
+                case 'ryanng':
+                    projectArray = ['project9/1.png', 'project9/2.png', 'project9/3.png']
+                    this.projectImg = new URL(`../assets/img/project9/${param}.png`, import.meta.url).href
+                    break;
+                case 'Amigitos':
+                    projectArray = ['project10/1.png', 'project10/2.png', 'project10/3.png']
+                    this.projectImg = new URL(`../assets/img/project10/${param}.png`, import.meta.url).href
+                    break;
+                case 'Musicas':
+                    projectArray = ['project11/1.png', 'project11/2.png', 'project11/3.png']
+                    this.projectImg = new URL(`../assets/img/project11/${param}.png`, import.meta.url).href
+                    break;
+
+
 
             }
             console.log(param)
