@@ -77,16 +77,17 @@ export default {
         smallTextAnimation(){
             let fullWordsSplit = this.fullWords.split('')
             let wordCurrentIndex = this.words[this.currentIndex]
-            if(!wordCurrentIndex || wordCurrentIndex == ''){
+            if(!wordCurrentIndex && fullWordsSplit[this.currentIndex]){
                 this.words.push(fullWordsSplit[this.currentIndex])
             }
         },
         verifyIntervals(){
             setTimeout(()=> {
+            console.log(this.words)
                 if(this.fullWords.length === this.words.length){
                     clearInterval(this.intervalAnimation)
                     return
-                }   
+                }  
                 this.verifyIntervals()
             }, 5500)
         },

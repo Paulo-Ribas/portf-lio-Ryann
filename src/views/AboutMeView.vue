@@ -24,7 +24,7 @@
                 <div class="description-container">
                     <p>
                         <TransitionGroup name="Opacity">
-                            <span v-for="(text, index) in text1" :key="index">{{text}}</span><br key="44">
+                            <span v-for="(text, index) in text1" :key="index">{{text}}</span>
                             <span v-for="(text, index) in text2" :key="index">{{text}}</span>
                             <RouterLink v-if="showContact" key="33" to="/contact">
                                 <TransitionGroup name="Opacity">
@@ -49,7 +49,7 @@ export default {
             text2:[],
             linkRouter: [],
             text1FullWords: 'Meu nome é Ryann Ghisi, tenho 17 anos e sou um Web Designer e Designer Gráfico.',
-            text2FullWords: 'Ingressei na área de design com o objetivo de aprimorar minhas habilidades empreendedoras e adquirir competências técnicas sólidas. Ao longo do tempo, desenvolvi experiência em design gráfico e web design, tornando-me capaz de criar designs funcionais e esteticamente agradáveis. Meu foco principal é atender às necessidades práticas dos meus clientes. Estou à disposição para auxiliá-lo na criação de designs para aplicativos, websites, logos e outros projetos relacionados ao design. Se precisar dos meus serviços ou quiser discutir colaborações, sinta-se à vontade para entrar em ',
+            text2FullWords: ' Ingressei na área de design com o objetivo de aprimorar minhas habilidades empreendedoras e adquirir competências técnicas sólidas. Ao longo do tempo, desenvolvi experiência em design gráfico e web design, tornando-me capaz de criar designs funcionais e estéticamente agradáveis. Meu foco principal é atender às necessidades práticas dos meus clientes. Estou à disposição para auxiliá-lo na criação de designs para aplicativos, websites, logos e outros projetos relacionados ao design. Se precisar dos meus serviços ou quiser discutir colaborações, sinta-se à vontade para entrar em ',
             linkRouterFullWords: 'contato.',
             currentIndexText1: 0,
             currentIndexText2: 0,
@@ -208,7 +208,12 @@ export default {
 .description-container p {
     font-family: 'Inknut Antiqua';
     color: white;
-    max-width: 500px;
+    background-color: #181818;
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 20px;
+    height: fit-content;
+    max-width: 520px;
 }
 .description-container p a {
     color: white;

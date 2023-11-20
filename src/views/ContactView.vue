@@ -4,12 +4,14 @@
         <div class="container">
             <div class="wrapper">
                 <div class="form-container">
-                    
-                    <h2>
+                    <h2 v-if="h2Temp" style="opacity: 0;">Fale Comigo.</h2>
+                <Transition name="H2Show">
+                    <h2 v-if="loaded">
                         <TransitionGroup name="Opacity">
                             <span v-for="(word, index) in words" :key="index">{{word}}</span>
                         </TransitionGroup>
                     </h2>
+                </Transition>     
                     <Transition name="Form">
                         <form v-if="loaded">
                             <div class="name-container">
@@ -54,7 +56,7 @@ import Whats from '../components/icons/Whats.vue'
 export default {
     components: {Whats},
     mounted(){
-        this.startSmallTextAnimation()
+        setTimeout(this.startSmallTextAnimation, 1050)
         setTimeout(()=> {
             this.verifyIntervals()
         }, (this.timing + 50) * this.fullWords.length)
@@ -72,6 +74,7 @@ export default {
             timing: 55,
             intervalAnimation: undefined,
             loaded: false,
+            h2Temp: true,
         }
     },
     methods: {
@@ -84,9 +87,10 @@ export default {
             this.intervalAnimation = interval
         },
         smallTextAnimation(){
+            this.h2Temp = false
             let fullWordsSplit = this.fullWords.split('')
             let wordCurrentIndex = this.words[this.currentIndex]
-            if(!wordCurrentIndex || wordCurrentIndex == ''){
+            if(!wordCurrentIndex && fullWordsSplit[this.currentIndex]){
                 this.words.push(fullWordsSplit[this.currentIndex])
             }
         },
@@ -126,6 +130,10 @@ export default {
     font-style: normal;
     letter-spacing: -0.9px;
     line-height: 155.99%; /* 46.797px */
+    
+}
+#home h2 span {
+    font-weight: 800;
 }
 label {
     color: #FFF;
@@ -256,7 +264,6 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 
 .Form-enter-active {
     transition: 0.9s;
-    transition-delay: 0.7s;
 }
 .Form-enter-from {
     opacity: 0;
@@ -269,7 +276,7 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 
 .SpanWhats-enter-active {
     transition: 0.6s;
-    transition-delay: 1.6s;
+    transition-delay: 0.4s;
 }
 .SpanWhats-enter-from {
     opacity: 0;
@@ -281,7 +288,7 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 }
 .svgAnimation-enter-active {
     transition: 0.7s;
-    transition-delay: 2s;
+    transition-delay: 0.8s;
 }
 .svgAnimation-enter-from {
     transform: scale(0);
@@ -289,5 +296,14 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 .svgAnimation-enter-to {
     transform: scale(1);
 }
-
+.H2Show-enter-active {
+    transition: 0.1s;
+    transition-delay: 1s;
+}
+.H2Show-enter-from {
+    opacity: 0;
+}
+.H2Show-enter-to {
+    opacity: 1;
+}
 </style>

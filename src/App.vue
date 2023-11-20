@@ -46,7 +46,9 @@ import { RouterLink, RouterView } from 'vue-router'
   @import url('https://fonts.googleapis.com/css2?family=Inter');
   @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
-  
+#app {
+  overflow: hidden;
+}
 
 * {
   margin: 0;
