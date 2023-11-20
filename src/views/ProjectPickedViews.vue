@@ -54,9 +54,9 @@ export default {
                     break;
                 case 'chat socket':
                     projectArray = [
-                        'project1/home.png', 'project1/0.png', 'project1/1.png', 'project1/2.png',
-                        'project1/3.png', 'project1/4.png', 'project1/5.png', 'project1/6.png',
-                        'project1/7.png', 'project1/8.png', 'project1/9.png',
+                        'project1/1.png', 'project1/2.png', 'project1/3.png', 'project1/4.png',
+                        'project1/5.png', 'project1/6.png', 'project1/7.png', 'project1/8.png',
+                        'project1/9.png', 'project1/10.png', 'project1/11.png',
                     ];
                     this.projectImg = new URL(`../assets/img/project1/${param}.png`, import.meta.url).href
                     break;

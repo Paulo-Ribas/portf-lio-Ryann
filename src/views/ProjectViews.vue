@@ -53,7 +53,7 @@ export default {
             startMousePosition: 0,
             loaded: false,
             projects:[{name:'cartão de apresentação', img: '../assets/img/project/1.png', number: '1'}, 
-            {name:'chat socket', img: '../assets/img/project1/home.png', number: '1'},
+            {name:'chat socket', img: '../assets/img/project1/1.png', number: '1'},
             {name:'funil whats', img: '../assets/img/project3/2.png', number: '2'},
             {name:'cardPauloRibas', img: '../assets/img/project2/2.png', number: '2'},
             {name: 'musiQo', img: '../assets/img/project4/1.png', number: '1'},
