@@ -4,32 +4,43 @@
         <div class="container">
             <div class="wrapper">
                 <div class="form-container">
-                    <h2>Fale Comigo.</h2>
-                    <form>
-                        <div class="name-container">
-                            <div class="first-name">
-                                <label>Seu nome*</label>
-                                <input id="name" name="name" type="text" placeholder="Pedro">
+                    
+                    <h2>
+                        <TransitionGroup name="Opacity">
+                            <span v-for="(word, index) in words" :key="index">{{word}}</span>
+                        </TransitionGroup>
+                    </h2>
+                    <Transition name="Form">
+                        <form v-if="loaded">
+                            <div class="name-container">
+                                <div class="first-name">
+                                    <label>Seu nome*</label>
+                                    <input id="name" name="name" type="text" placeholder="Pedro">
+                                </div>
+                                <div class="second-name">
+                                    <label for="secondname">Seu sobrenome*</label>
+                                    <input id="secondname" name="secondname" type="text" placeholder="Silva">
+                                </div>
                             </div>
-                            <div class="second-name">
-                                <label for="secondname">Seu sobrenome*</label>
-                                <input id="secondname" name="secondname" type="text" placeholder="Silva">
+                            <div class="email-container">
+                                <label for="email">Email*</label>
+                                <input id="email" name="email" type="text" placeholder="pedrosilva@gmail.com">
                             </div>
-                        </div>
-                        <div class="email-container">
-                            <label for="email">Email*</label>
-                            <input id="email" name="email" type="text" placeholder="pedrosilva@gmail.com">
-                        </div>
-                        <div class="mensagem">
-                            <label for="mensagem">Mensagem*</label>
-                            <textarea id="mensagem" placeholder="Escreva Aqui Sua Mensagem"></textarea>
-                        </div>
-                        <input type="submit" id="submit" value="Enviar mensagem">
-                    </form>
+                            <div class="mensagem">
+                                <label for="mensagem">Mensagem*</label>
+                                <textarea id="mensagem" placeholder="Escreva Aqui Sua Mensagem"></textarea>
+                            </div>
+                            <input type="submit" id="submit" value="Enviar mensagem">
+                        </form>
+                    </Transition>
                 </div>
                 <div class="whats">
-                    <Whats></Whats>
-                    <a href="https://api.whatsapp.com/send?phone=48999900383">(48) 99990-0383</a>
+                    <Transition name="svgAnimation">
+                        <Whats v-if="loaded"></Whats>
+                    </Transition>
+                    <Transition name="SpanWhats">
+                        <a href="https://api.whatsapp.com/send?phone=48999900383" v-if="loaded">(48) 99990-0383</a>
+                    </Transition>
 
                 </div>
             </div>
@@ -41,7 +52,54 @@
 <script>
 import Whats from '../components/icons/Whats.vue'
 export default {
-    components: {Whats}
+    components: {Whats},
+    mounted(){
+        this.startSmallTextAnimation()
+        setTimeout(()=> {
+            this.verifyIntervals()
+        }, (this.timing + 50) * this.fullWords.length)
+        
+        this.loaded = true
+    },
+    beforeUnmount(){
+        clearInterval(this.intervalAnimation)
+    },
+    data(){
+        return { 
+            words: [],
+            fullWords: 'Fale Comigo.',
+            currentIndex: 0,
+            timing: 55,
+            intervalAnimation: undefined,
+            loaded: false,
+        }
+    },
+    methods: {
+        startSmallTextAnimation(){
+            let interval = setInterval(() => {
+                this.smallTextAnimation()
+                this.currentIndex++
+                return interval
+            }, this.timing);
+            this.intervalAnimation = interval
+        },
+        smallTextAnimation(){
+            let fullWordsSplit = this.fullWords.split('')
+            let wordCurrentIndex = this.words[this.currentIndex]
+            if(!wordCurrentIndex || wordCurrentIndex == ''){
+                this.words.push(fullWordsSplit[this.currentIndex])
+            }
+        },
+         verifyIntervals(){
+            setTimeout(()=> {
+                if(this.fullWords.length === this.words.length){
+                    clearInterval(this.intervalAnimation)
+                    return
+                }   
+                this.verifyIntervals()
+            }, 5500)
+        },
+    }
 
 
 }
@@ -92,7 +150,7 @@ label {
 } 
 form {
     width: 100%;
-    height: 100%;
+    height: 85%;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -118,7 +176,7 @@ form {
 .mensagem {
     width: 100%;
     height: 100%;
-    max-height: 260px;
+    max-height: 160px;
     display: flex;
     flex-direction: column;
 }
@@ -126,7 +184,7 @@ form {
 textarea {
     width: 100%;
     height: 90%;
-    max-height: 233px;
+    max-height: 133px;
     resize: none;
     background: none;
     border: 2.32px solid #C5C5C5;
@@ -143,12 +201,11 @@ textarea::placeholder {
 }
 
 .whats {
-    flex: 0.5;
+    flex: 0.2;
     max-width: 500px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
 }
 .whats a {
     color: white;
@@ -186,6 +243,51 @@ input[type='submit'] {
 input[type='text']::placeholder, input[type='email']::placeholder{
     color: #C5C5C5;
     
+}
+.Opacity-enter-active {
+    transition: 0.1s;
+}
+.Opacity-enter-from {
+    opacity: 0.4;
+}
+.Opacity-enter-to {
+    opacity: 1;
+}
+
+.Form-enter-active {
+    transition: 0.9s;
+    transition-delay: 0.7s;
+}
+.Form-enter-from {
+    opacity: 0;
+    transform: translateY(-100px);
+}
+.Form-enter-to {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.SpanWhats-enter-active {
+    transition: 0.6s;
+    transition-delay: 1.6s;
+}
+.SpanWhats-enter-from {
+    opacity: 0;
+    transform: translateX(-400px);
+}
+.SpanWhats-enter-to {
+    opacity: 1;
+    transform: translateX(0px);
+}
+.svgAnimation-enter-active {
+    transition: 0.7s;
+    transition-delay: 2s;
+}
+.svgAnimation-enter-from {
+    transform: scale(0);
+}
+.svgAnimation-enter-to {
+    transform: scale(1);
 }
 
 </style>

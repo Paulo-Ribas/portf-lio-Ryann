@@ -4,7 +4,7 @@
             <div class="project-picked-container">
               <div class="btn-title">
                   <RouterLink to="/projects" class="return">Voltar</RouterLink>
-                  <h2>{{projectName}}</h2>
+                  <!-- <h2>{{projectName}}</h2> -->
               </div>
               <div class="project-img-section">
                   <ProjectChoiced :projectListProps="arrayImgs"></ProjectChoiced>
@@ -104,7 +104,6 @@ export default {
 
 
             }
-            console.log(param)
             return projectArray;
         },
         makeSrcFromArray(array) {
@@ -149,7 +148,6 @@ export default {
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
         position: relative;
         z-index: 2;
     }
@@ -163,13 +161,11 @@ export default {
     }
 
     .btn-title a {
-        border-radius: 1rem;
-        border: 1px solid #000;
-        -webkit-text-stroke: 0.2px black;
-        background: #D9D9D9;
-        color: #000;
-        padding: 8.5px 33px;
-        font-family: 'Inknut Antiqua';
+        border-radius: 0rem 1rem 1rem 0rem;
+        background: transparent;
+        color: white;
+        padding: 10.5px 33px;
+        font-family: 'Roboto';
         text-align: center;
         font-style: normal;
         font-weight: 500;
@@ -177,7 +173,14 @@ export default {
         text-transform: uppercase;
         width: fit-content;
         font-size: 16px;
+        border: 1.6px solid #D9D9D9;
+        margin: 13px 0px 7px 0px;
+        -webkit-text-stroke: 0.2px #D9D9D9;
+        transition: 0.5s;
     
+    }
+    .btn-title a:hover {
+        background: #181818;
     }
     .btn-title h2 {
         color: white;

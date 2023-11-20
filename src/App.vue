@@ -12,16 +12,28 @@ import { RouterLink, RouterView } from 'vue-router'
       </div>
       <ul>
         <li>
-          <routerLink to="/Home">home</routerLink>
+          <routerLink to="/Home">
+            home
+            <div class="animation-bar"></div>
+          </routerLink>
         </li>
         <li>
-          <routerLink to="/About">sobre mim</routerLink>
+          <routerLink to="/About">
+            sobre mim
+            <div class="animation-bar"></div>
+          </routerLink>
         </li>
         <li>
-          <routerLink to="/Projects">projetos</routerLink>
+          <routerLink to="/Projects">
+            projetos
+            <div class="animation-bar"></div>
+          </routerLink>
         </li>
         <li>
-          <routerLink to="/Contact">contato</routerLink>
+          <routerLink to="/Contact">
+            contato
+            <div class="animation-bar"></div>
+          </routerLink>
         </li>
       </ul>
     </nav>
@@ -32,6 +44,9 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua');
   @import url('https://fonts.googleapis.com/css2?family=Inter');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+  
 
 * {
   margin: 0;
@@ -99,7 +114,21 @@ nav li a {
   color: white;
   font-size: 1rem;
   text-transform: uppercase;
-  font-family: 'Inknut Antiqua';
+  font-family: 'Roboto';
+  position: relative;
+  display: inline-block;
+  padding: 0;
+}
+.animation-bar {
+  width: 0%;
+  transition: 0.5s;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  height: 0.5px;
+}
+nav li a:hover > .animation-bar {
+  width: 100%;
 }
 
 nav a.router-link-exact-active:hover {
