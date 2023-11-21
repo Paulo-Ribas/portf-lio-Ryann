@@ -7,10 +7,11 @@
                   <!-- <h2>{{projectName}}</h2> -->
               </div>
               <div class="project-img-section">
-                  <ProjectChoiced :projectListProps="arrayImgs"></ProjectChoiced>
+                  <ProjectList v-if="!responsive" :projectListProps="arrayImgs"></ProjectList>
                   <div class="project-img-container">
                     <img id="img-project" :src="projectImg" alt="imagem do design do projeto selecionado" @click="zoomToggle">
                   </div>
+                  <ProjectListMq v-if="responsive" :projectListProps="arrayImgs"></ProjectListMq>
               </div>
             </div>
         </div>
@@ -18,10 +19,11 @@
 </template>
 
 <script>
-import ProjectChoiced from '../components/ProjectChoiced.vue';
+import ProjectList from '../components/ProjectList.vue';
+import ProjectListMq from '../components/ProjectListMq.vue';
 export default {
     components: {
-        ProjectChoiced
+        ProjectList, ProjectListMq
     },
     data() {
         return {
@@ -29,7 +31,13 @@ export default {
           projectName: decodeURI(this.$route.params.name),
           projectImg: '',
           zoom: true,
+          responsive: false,
+
         };
+    },
+    beforeMount(){
+        this.setResponsive()
+
     },
     created(){
       let array = this.createArray()
@@ -43,7 +51,20 @@ export default {
             return urls;
         }
     },
+    watch:{
+        '$screen.width'(value){
+            this.setResponsive(value)
+        }
+    },
     methods: {
+        setResponsive(value = this.$screen.width){
+            if(value <= 556) {
+                this.responsive = true
+            }
+            else {
+                this.responsive = false
+            }
+        },
         createArray() {
             let param = this.$route.params.number;
             let projectArray = [];
@@ -100,8 +121,6 @@ export default {
                     projectArray = ['project11/1.png', 'project11/2.png', 'project11/3.png']
                     this.projectImg = new URL(`../assets/img/project11/${param}.png`, import.meta.url).href
                     break;
-
-
 
             }
             return projectArray;
@@ -222,6 +241,29 @@ export default {
     .project-img-container::-webkit-scrollbar-thumb {
         background-color: white;
         border-radius: 4px;
+    }
+
+    @media screen and (max-width: 556px) {
+
+        .project-picked-container {
+            justify-content: space-around;
+        }
+        .project-img-section {
+            flex-direction: column;
+        }
+        .btn-title {
+            width: 95%;
+            align-self: center;
+        }
+        .project-img-container {
+            flex: none;
+            height: 64%;
+            align-items: center;
+        }
+        .project-img-container img {
+            max-width: 95%;
+        }
+
     }
 
 </style>

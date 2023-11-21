@@ -3,21 +3,23 @@
         <div class="shadow"></div>
         <div class="container">
             <div class="wrapper">
-                <div class="tittle">
+                <div class="title">
                     <h1>
                         <Transition name="Title">
                             <span v-if="loaded">
                                 projetos
                             </span>
                         </Transition>
-
                         <Transition name="svgAnimation">
-                            <svg v-if="loaded" xmlns="http://www.w3.org/2000/svg" width="90" height="99" viewBox="0 0 110 119" fill="none">
+                            <svg v-if="loaded && !responsive" xmlns="http://www.w3.org/2000/svg" width="90" height="99" viewBox="0 0 110 119" fill="none">
                                 <path d="M106.048 27.1758L57.8841 0.806075C56.9175 0.277199 55.8334 0 54.7316 0C53.6298 0 52.5457 0.277199 51.5791 0.806075L3.41525 27.1758C2.38203 27.7411 1.51983 28.5739 0.918971 29.5868C0.318115 30.5998 0.000708929 31.7557 0 32.9335V85.2788C0.000708929 86.4566 0.318115 87.6125 0.918971 88.6255C1.51983 89.6385 2.38203 90.4713 3.41525 91.0366L51.5791 117.406C52.5449 117.938 53.6293 118.216 54.7316 118.216C55.8339 118.216 56.9183 117.938 57.8841 117.406L106.048 91.0366C107.081 90.4713 107.943 89.6385 108.544 88.6255C109.145 87.6125 109.462 86.4566 109.463 85.2788V32.9335C109.462 31.7557 109.145 30.5998 108.544 29.5868C107.943 28.5739 107.081 27.7411 106.048 27.1758ZM105.085 85.2788C105.084 85.6708 104.978 86.0553 104.777 86.3923C104.577 86.7293 104.29 87.0063 103.946 87.1944L55.7824 113.564C55.4602 113.74 55.0989 113.833 54.7316 113.833C54.3643 113.833 54.003 113.74 53.6808 113.564L5.51695 87.1944C5.17308 87.0063 4.88603 86.7293 4.68578 86.3923C4.48553 86.0553 4.37942 85.6708 4.37853 85.2788V32.9335C4.37942 32.5416 4.48553 32.157 4.68578 31.82C4.88603 31.4831 5.17308 31.2061 5.51695 31.0179L53.6808 4.64823C54.002 4.46897 54.3637 4.37486 54.7316 4.37486C55.0995 4.37486 55.4612 4.46897 55.7824 4.64823L103.946 31.0179C104.29 31.2061 104.577 31.4831 104.777 31.82C104.978 32.157 105.084 32.5416 105.085 32.9335V85.2788Z" fill="white"/>
                                 <path d="M72 51.7444L54.5325 69.2119L37.0649 51.7444" stroke="white" stroke-width="4.65801" stroke-linecap="round"/>
                             </svg>
                         </Transition>
                     </h1>
+                    <Transition name="svgAnimation">
+                        <SetaBottom v-if="loaded && responsive"></SetaBottom>
+                    </Transition>
                 </div>
                 <RouterView></RouterView>
                 <div class="projects-container">
@@ -34,11 +36,16 @@
 </template>
 <script>
 import ProjectsSlide from '../components/ProjectsSlide.vue';
+import SetaBottom from '../components/icons/SetaBottom.vue';
 import SetaLeft from '../components/icons/SetaLeft.vue';
 import SetaRight from '../components/icons/SetaRight.vue';
 
+
 export default {
-    components: {ProjectsSlide, SetaLeft, SetaRight},
+    components: {ProjectsSlide, SetaLeft, SetaRight, SetaBottom},
+    beforeMount(){
+        this.setResponsive()
+    },
     mounted(){
         this.loaded = true
     },
@@ -52,6 +59,7 @@ export default {
             prevTranslate: 0,
             startMousePosition: 0,
             loaded: false,
+            responsive: false,
             projects:[{name:'cartão de apresentação', img: '../assets/img/project/1.png', number: '1'}, 
             {name:'chat socket', img: '../assets/img/project1/1.png', number: '1'},
             {name:'funil whats', img: '../assets/img/project3/2.png', number: '2'},
@@ -69,7 +77,20 @@ export default {
         
         }
     },
+    watch:{
+        '$screen.width'(value){
+            this.setResponsive(value)
+        }
+    },
     methods: {
+        setResponsive(value = this.$screen.width){
+            if(value <= 556) {
+                this.responsive = true
+            }
+            else {
+                this.responsive = false
+            }
+        },
         translateToLeft(){
             let slide = document.querySelector('.slide')
             console.log('clickei left', slide)
@@ -207,12 +228,12 @@ export default {
     flex-direction: column;
     max-height: 700px;
 }
-.tittle {
+.title {
     flex: 1;
     display: flex;
     justify-content: center;
 }
-.tittle svg {
+.title svg {
     margin-top: 20px;
 }
 .projects-container {
@@ -294,5 +315,39 @@ export default {
     position: absolute;
     right: 0%;
     top: 50%;
+}
+@media screen and (max-width: 556px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    #home h1 {
+        color: white;
+        font-family: Inter;
+        font-size: 4rem;
+        font-style: normal;
+        font-weight: bold;
+        line-height: 5.7rem;
+        text-transform: uppercase;
+        word-spacing: 6px;
+        -webkit-text-stroke: 4px;
+        padding-top: 0%;
+        width: fit-content;
+        max-width: 99%;
+        color: #FFF;
+        text-align: center;
+    }
+    .title {
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+    }
+    .projects-container {
+        flex: 1;
+    }
+
+    .SecondText-enter-active {
+    transition: 0.7s;
+    }
+    
 }
 </style>

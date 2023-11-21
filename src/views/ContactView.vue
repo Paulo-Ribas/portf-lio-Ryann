@@ -4,14 +4,14 @@
         <div class="container">
             <div class="wrapper">
                 <div class="form-container">
-                    <h2 v-if="h2Temp" style="opacity: 0;">Fale Comigo.</h2>
-                <Transition name="H2Show">
+                    <!-- <h2 v-if="h2Temp" style="opacity: 0;">Fale Comigo.</h2> -->
+                <!-- <Transition name="H2Show">
                     <h2 v-if="loaded">
                         <TransitionGroup name="Opacity">
                             <span v-for="(word, index) in words" :key="index">{{word}}</span>
                         </TransitionGroup>
                     </h2>
-                </Transition>     
+                </Transition>   -->   
                     <Transition name="Form">
                         <form v-if="loaded">
                             <div class="name-container">
@@ -55,6 +55,9 @@
 import Whats from '../components/icons/Whats.vue'
 export default {
     components: {Whats},
+    beforeMount(){
+        this.setResponsive()
+    },
     mounted(){
         setTimeout(this.startSmallTextAnimation, 1050)
         setTimeout(()=> {
@@ -75,9 +78,23 @@ export default {
             intervalAnimation: undefined,
             loaded: false,
             h2Temp: true,
+            responsive: false,
+        }
+    },
+    watch:{
+        '$screen.width'(value){
+            this.setResponsive(value)
         }
     },
     methods: {
+        setResponsive(value = this.$screen.width){
+            if(value <= 556) {
+                this.responsive = true
+            }
+            else {
+                this.responsive = false
+            }
+        },
         startSmallTextAnimation(){
             let interval = setInterval(() => {
                 this.smallTextAnimation()
@@ -218,7 +235,7 @@ textarea::placeholder {
 .whats a {
     color: white;
     font-family: Inknut Antiqua;
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -305,5 +322,53 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 }
 .H2Show-enter-to {
     opacity: 1;
+}
+@media screen and (max-width: 556px) {
+    #home h2 {
+        font-size: 1.9rem;
+    }
+    input[type='text'], input[type='email']{
+    border-radius: 11.601px;
+    border: 2.40px solid #C5C5C5;
+    background: none;
+    padding: 10px 10px;
+    outline: none;
+    color: white;
+    font-size: 0.9rem;
+}
+input[type='submit'] {
+    border-radius: 11.601px;
+    background: rgba(217, 217, 217, 0.25);
+    border: 2.32px solid rgba(197, 197, 197, 0.50);
+    width: 70%;
+    padding: 13px 8px;
+    text-align: center;
+    font-size: 0.96rem;
+    color: white;
+    margin: 0px auto;
+    -webkit-text-stroke: 0.3px white;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+
+}
+.form-container {
+    flex: 1;
+    width: 96%;
+    max-width: 500px;
+    padding-top: 5px;
+}
+.name-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.first-name, .second-name {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+
+} 
+    
 }
 </style>

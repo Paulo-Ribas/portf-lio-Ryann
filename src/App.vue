@@ -146,5 +146,16 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
+@media screen and (max-width: 556px) {
+  nav {
+    padding: 0px 5px;
+  }
+  nav ul {
+    justify-content: space-between;
+  }
+  .logo-container {
+    margin: 0px;
+    max-width: 55px;
+  }
+}
 </style>
