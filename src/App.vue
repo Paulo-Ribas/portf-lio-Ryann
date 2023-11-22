@@ -1,5 +1,18 @@
 <script setup>
+import { ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
+import Loanding from './components/Loanding.vue';
+const loaded = ref(false)
+ref(loaded)
+
+function startLoad() {
+  let img = new Image(6000, 6000)
+  img.src = new URL('./assets/img/AboutMe.jpg', import.meta.url).href
+  img.addEventListener('load', ()=> {
+    loaded.value = true
+  })
+}
+startLoad()
 </script>
 
 <template>
@@ -38,7 +51,8 @@ import { RouterLink, RouterView } from 'vue-router'
       </ul>
     </nav>
   </header>
-  <RouterView />
+  <Loanding v-if="!loaded"></Loanding>
+  <RouterView v-if="loaded" />
 </template>
 
 <style scoped>
@@ -60,20 +74,12 @@ header {
   background-color: #181818;
   width: 100%;
 }
-:deep(.shadow) {
-  background-color: #181818;
-  width: 100%;
-  height: 100%;
-  opacity: 0.6;
-  position: absolute;
-  z-index: 0;
-}
 :deep(.container) {
     width: 100%;
     height: 100%;
     margin: auto;
     max-width: 1425px;
-    z-index: 1;
+    z-index: 2;
     position: relative;
 }
 
@@ -146,6 +152,12 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
+@media screen and (max-width: 780px) {
+  nav li a {
+    font-size: 1.8rem;
+  }
+}
+
 @media screen and (max-width: 556px) {
   nav {
     padding: 0px 5px;

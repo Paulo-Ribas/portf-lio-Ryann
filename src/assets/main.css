@@ -6,6 +6,7 @@
   margin: 0 auto;
   font-weight: normal;
   overflow: hidden;
+  background-color: #181818;
 }
 
 a,
@@ -13,6 +14,11 @@ a,
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
+}
+@media screen and (max-width: 780px) {
+  html {
+    font-size: 7px;
+  }
 }
 
 @media screen and (max-width: 556px) {

@@ -59,10 +59,10 @@ export default {
         this.setResponsive()
     },
     mounted(){
-        setTimeout(this.startSmallTextAnimation, 1050)
+        /* setTimeout(this.startSmallTextAnimation, 1050)
         setTimeout(()=> {
             this.verifyIntervals()
-        }, (this.timing + 50) * this.fullWords.length)
+        }, (this.timing + 50) * this.fullWords.length) */
         
         this.loaded = true
     },
@@ -109,6 +109,7 @@ export default {
             let wordCurrentIndex = this.words[this.currentIndex]
             if(!wordCurrentIndex && fullWordsSplit[this.currentIndex]){
                 this.words.push(fullWordsSplit[this.currentIndex])
+                if(fullWordsSplit.length === this.words.length) return clearInterval(this.intervalAnimation)
             }
         },
          verifyIntervals(){
@@ -151,6 +152,22 @@ export default {
 }
 #home h2 span {
     font-weight: 800;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    max-width: 1425px;
+    z-index: 2;
+    position: relative;
+}
+.shadow {
+    background-color: #181818;
+    height: 100%;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
 }
 label {
     color: #FFF;
@@ -322,6 +339,25 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 }
 .H2Show-enter-to {
     opacity: 1;
+}
+@media screen and (max-width: 780px) {
+    .form-container {
+        flex: 1;
+        width: 90%;
+        max-width: 500px;
+    } 
+    .wrapper {
+        padding-top: 15px;
+    }
+    form {
+        height: 85%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        padding-bottom: 5px;
+    }   
+
 }
 @media screen and (max-width: 556px) {
     #home h2 {

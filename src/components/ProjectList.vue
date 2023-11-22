@@ -1,8 +1,8 @@
 <template>
     <div class="project-container">
-      <div class="project-list" :key="projectChoiced">
+      <div v-once class="project-list" :key="projectChoiced" @scroll="saveScrollState">
           <div class="project-img-container" v-for="(img, index) in projectList" :key="index">
-            <img :src="img.src" alt="imagem do projeto" :class="{selected: (index + 1 == projectChoiced)}">
+            <img @load="attScrollState" :src="img.src" alt="imagem do projeto" :class="{selected: (index + 1 == projectChoiced)}">
             <RouterLink :to="`/projects/${projectName}/${index + 1}`"></RouterLink>  
           </div>
       </div>
@@ -14,6 +14,13 @@
       props:{
           projectListProps: Array
       },
+      beforeUnmount(){
+          this.saveScrollState()
+          
+        },
+        mounted(){
+            this.attScrollState()
+      },
       data(){
           return {
               projectChoiced: this.$route.params.number,
@@ -21,14 +28,33 @@
               projectName: this.$route.params.name
           }
       },
-      mounted(){
-          console.log('quantas vezes?')
+      methods: {
+        getScrollTop(){
+            let Scroll = document.querySelector('.project-list')
+            return Scroll.scrollTop
+        },
+        setScrollTop(value){
+            let numberInt = parseInt(value)
+            let Scroll = document.querySelector('.project-list')
+            Scroll.scrollTop = numberInt
+        },
+        saveScrollState(){
+            let scrollTop = this.getScrollTop()
+            localStorage.setItem('projectName', this.projectName)
+            localStorage.setItem('scrollSaved', `${scrollTop}`)
+        },
+        attScrollState(){
+            let projectSaved = localStorage.getItem('projectName')
+            if(this.projectName === projectSaved) {
+                let scrollSaved = localStorage.getItem('scrollSaved')
+                this.setScrollTop(scrollSaved)
+            }
+        }
       },
       watch:{
         '$route.params.number'(value){
             this.projectChoiced = value
-
-        }
+        },
       },
   
   }

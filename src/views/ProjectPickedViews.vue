@@ -170,6 +170,7 @@ export default {
         position: relative;
         z-index: 2;
     }
+    
     .btn-title {
         width: 100%;
         height: fit-content;
