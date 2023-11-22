@@ -165,6 +165,9 @@ nav a:first-of-type {
   nav ul {
     justify-content: space-between;
   }
+  nav li a {
+    font-size: 1rem;
+  }
   .logo-container {
     margin: 0px;
     max-width: 55px;
