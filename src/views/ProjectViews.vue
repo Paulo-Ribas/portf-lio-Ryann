@@ -97,13 +97,10 @@ export default {
             let slide = document.querySelector('.slide')
             this.currentTranslate += 333
             slide.style.transform = `translateX(${this.currentTranslate}px)`
-            console.log(this.countLeft)
             if(this.countRight > 0 && this.countGeneral > 0) {
-                let clicks = (this.countLeft > this.countGeneral ? this.countLeft - this.countGeneral : this.countGeneral - this.countLeft)
-                this.countRight = (this.countRight - clicks)
-                this.countGeneral++
-                this.countLeft = this.countGeneral
-                console.log('general:', this.countGeneral, 'esquerda:',this.countLeft)
+                this.countLeft++
+                this.countRight--
+                console.log(`estou indo para a esquerda, e a esquerda tem : ${this.countLeft} e a direita tem: ${this.countRight} e a quantidade desejada é ${this.projects.length}`)
                 this.verifyCurrentCountPosition()
                 return
             }
@@ -119,10 +116,9 @@ export default {
             slide.style.transform = `translateX(${this.currentTranslate}px)`
             
             if(this.countLeft > 0 && this.countGeneral > 0){
-                let clicks = (this.countRight > this.countGeneral ? this.countRight - this.countGeneral : this.countGeneral - this.countRight)
-                this.countLeft = (this.countLeft - clicks)
-                this.countGeneral++
-                this.countRight = this.countGeneral
+                this.countRight++
+                this.countLeft--
+                console.log(`estou indo para a direita, e a esquerda tem : ${this.countLeft} e a direita tem: ${this.countRight} e a quantidade desejada é ${this.projects.length - 3}`)
                 this.verifyCurrentCountPosition()
                 return
             }
@@ -154,7 +150,7 @@ export default {
             let slide = document.querySelector('.slide')
             let amount = this.projects.length
             if(!this.doubled) amount *= 2
-            if(this.countGeneral < 0 || this.countLeft == amount) {
+            if(this.countGeneral < 0 || this.countLeft == amount - 3) {
                 this.currentTranslate = 0
                 slide.style.transition = '0s'
                 slide.style.transitionDuraction = '0s'
@@ -184,7 +180,7 @@ export default {
                     slide.style.transform =  `translateX(${this.currentTranslate}px)`
                 }, 3);
                 this.countRight = (amount / 2) - 3
-                this.countLeft = (amount / 2) 
+                this.countLeft = (amount / 2)
                 this.countGeneral = (amount / 2) - 3
                 return
             }
