@@ -340,25 +340,6 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 .H2Show-enter-to {
     opacity: 1;
 }
-@media screen and (max-width: 780px) {
-    .form-container {
-        flex: 1;
-        width: 90%;
-        max-width: 500px;
-    } 
-    .wrapper {
-        padding-top: 15px;
-    }
-    form {
-        height: 85%;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-        padding-bottom: 5px;
-    }   
-
-}
 @media screen and (max-width: 556px) {
     #home h2 {
         font-size: 1.9rem;
@@ -385,7 +366,7 @@ input[type='submit'] {
     -webkit-text-stroke: 0.3px white;
     letter-spacing: 0.5px;
     cursor: pointer;
-
+    
 }
 .form-container {
     flex: 1;
@@ -403,8 +384,27 @@ input[type='submit'] {
     width: 45%;
     display: flex;
     flex-direction: column;
-
+    
 } 
     
+}
+@media screen and (max-width: 870px) {
+    .form-container {
+        flex: 1;
+        width: 90%;
+        max-width: 500px;
+    } 
+    .wrapper {
+        padding-top: 15px;
+    }
+    form {
+        height: 85%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        padding-bottom: 5px;
+    }   
+
 }
 </style>

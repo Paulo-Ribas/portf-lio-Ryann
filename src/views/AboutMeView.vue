@@ -51,6 +51,14 @@ export default {
     beforeMount(){
         this.setResponsive()
     },
+    metaInfo: {
+        title: 'Sobre Mim',
+        meta: [
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            { hid: 'description', name: 'description', content: 'Aqui você descobre mais sobre mim, o compromisso com o Design e o motivo por eu ter escolhido essa área' },
+        ],
+        
+    },
     data(){
         return {
             text1: [],
@@ -65,7 +73,7 @@ export default {
             intervalAnimation1: undefined,
             intervalAnimation2: undefined,
             intervalAnimation3: undefined,
-            timing: 30,
+            timing: 25,
             loaded: false,
             showContact: false,
             responsive: false,
@@ -80,29 +88,14 @@ export default {
         }
     },
     mounted(){
+        this.text1 = this.text1FullWords.split('')
+        this.text2 = this.text2FullWords.split('')
+        this.linkRouter = this.linkRouterFullWords.split('')
         this.loaded = true
-        let tout1
-        let tout2
-        tout1 = setTimeout(()=> {
-            this.startSmallTextAnimation(1)
-            return tout1
-        }, 1500)
-        tout2 = setTimeout(() => {
-            this.startSmallTextAnimation(2)
-            return tout2
-        }, (this.timing + 2) * this.text1FullWords.length * 1.5);
-        this.tout1 = tout1
-        this.tout2 = tout2
-        this.verifyIntervals()
+        this.startAllTextAnimations()
     },
     beforeUnmount(){
-        clearInterval(this.intervalAnimation1)
-        clearInterval(this.intervalAnimation2)
-        clearInterval(this.intervalAnimation3)
-        clearTimeout(this.tout1)
-        clearTimeout(this.tout2)
-        clearTimeout(this.tout3)
-        console.log(this.tout1, this.tout2)
+        
         
     },
     methods:{
@@ -114,77 +107,21 @@ export default {
                 this.responsive = false
             }
         },
-        startSmallTextAnimation(animation){
-            if(animation === 1) {
-                let interval = setInterval(() => {
-                    this.smallTextAnimation1()
-                    this.currentIndexText1++
-                    return interval
-                }, this.timing);
-                this.intervalAnimation1 = interval
-            }
-            if(animation === 2) {
-                let interval = setInterval(() => {
-                    this.smallTextAnimation2()
-                    this.currentIndexText2++
-                    return interval
-                }, this.timing);
-                this.intervalAnimation2 = interval
-            }
-            if(animation === 3) {
-                let interval = setInterval(() => {
-                    this.smallTextAnimation3()
-                    this.currentIndexText3++
-                    return interval
-                }, this.timing);
-                this.intervalAnimation3 = interval
-            }
+        startAllTextAnimations(){
+            let intervalAnimation1 = setInterval(()=> {
+                this.animationCascate1()
+            }, this.timing)
+            this.intervalAnimation1 = intervalAnimation1
         },
-        smallTextAnimation1(){
-            let fullWordsSplit = this.text1FullWords.split('')
-            let wordCurrentIndex = this.text1[this.currentIndexText1]
-            console.log('a')
-            if(!wordCurrentIndex && fullWordsSplit[this.currentIndexText1]){
-                this.text1.push(fullWordsSplit[this.currentIndexText1])
-                if(fullWordsSplit.length === this.text1.length) return clearInterval(this.intervalAnimation1)
+        animationCascate1(){
+            let spans = Array.from(document.querySelectorAll('p span'))
+            spans[this.currentIndexText1].classList.add('showUp')
+            if(this.currentIndexText1 + 1 === spans.length) {
+                clearInterval(this.intervalAnimation1s)
             }
+            this.currentIndexText1++
+        }   
     },
-    smallTextAnimation2(){
-        let fullWordsSplit = this.text2FullWords.split('')
-        let wordCurrentIndex = this.text2[this.currentIndexText2]
-        if(!wordCurrentIndex && fullWordsSplit[this.currentIndexText2]){
-            this.text2.push(fullWordsSplit[this.currentIndexText2])
-            if(fullWordsSplit.length === this.text2.length) clearInterval(this.intervalAnimation2)
-            console.log('q')
-            }
-            if(this.currentIndexText2 + 1  === fullWordsSplit.length){
-                this.showContact = true
-                let tout3 = setInterval(() => {
-                    this.startSmallTextAnimation(3)
-                    return
-                }, this.timing);
-                this.tout3 = tout3
-            }
-        },
-        smallTextAnimation3(){
-            let fullWordsSplit = this.linkRouterFullWords.split('')
-            let wordCurrentIndex = this.linkRouter[this.currentIndexText3]
-            if(!wordCurrentIndex && fullWordsSplit[this.currentIndexText3]){
-                this.linkRouter.push(fullWordsSplit[this.currentIndexText3])
-                if(fullWordsSplit.length === this.linkRouter.length) return clearInterval(this.intervalAnimation3)
-
-            }
-        },
-        verifyIntervals(){
-            setTimeout(()=> {
-                if(this.text2FullWords.length === this.words.length){
-                    clearInterval(this.intervalAnimation2)
-                    return
-                }   
-                this.verifyIntervals()
-            }, 5500)
-        },
-    }
 
 }
 
@@ -282,6 +219,9 @@ export default {
     color: white;
     text-decoration: underline;
 }
+.description-container p span {
+    opacity: 0;
+}
 
 .Opacity-enter-active {
     transition: 0.1s;
@@ -327,29 +267,21 @@ export default {
 .svgAnimation-enter-to {
     transform: scale(1);
 }
-@media screen and (max-width: 780px) {
-    .description-container {
-        padding-top: 0%;
-        align-items: center;
-    }
-    .title {
-        flex: 1;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        padding-top: 0%;
-        align-items: center;
-
-    }
-  .description-container p {
-    padding: 10px 10px;
-    font-size: 1.5rem;
-    max-width: 300px;
-    max-height: 240px;
-    overflow-y: auto;
-  }
+.showUp {
+    transition: 0.1s;
+    animation: opacity;
+    animation-fill-mode: forwards;
 }
 
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+    
+}
 @media screen and (max-width: 556px) {
     .wrapper {
         flex-direction: column;
@@ -406,6 +338,28 @@ export default {
     font-size: 1rem;
     max-height: 316px;
     overflow-y: auto;
+}
+@media screen and (max-width: 870px) {
+    .description-container {
+        padding-top: 0%;
+        align-items: center;
+    }
+    .title {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 0%;
+        align-items: center;
+
+    }
+  .description-container p {
+    padding: 10px 10px;
+    font-size: 1.5rem;
+    max-width: 300px;
+    max-height: 240px;
+    overflow-y: auto;
+  }
 }
     
 }

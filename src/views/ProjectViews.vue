@@ -11,9 +11,9 @@
                             </span>
                         </Transition>
                         <Transition name="svgAnimation">
-                            <svg v-if="loaded && !responsive" xmlns="http://www.w3.org/2000/svg" width="6.250rem" height="6.813rem" viewBox="0 0 110 119" fill="none">
-                                <path d="M106.048 27.4961L57.8841 1.12639C56.9175 0.597512 55.8334 0.320313 54.7316 0.320312C53.6298 0.320312 52.5457 0.597512 51.5791 1.12639L3.41525 27.4961C2.38203 28.0614 1.51983 28.8942 0.918971 29.9072C0.318115 30.9201 0.000708929 32.0761 0 33.2538V85.5991C0.000708929 86.7769 0.318115 87.9328 0.918971 88.9458C1.51983 89.9588 2.38203 90.7916 3.41525 91.3569L51.5791 117.727C52.5449 118.258 53.6293 118.537 54.7316 118.537C55.8339 118.537 56.9183 118.258 57.8841 117.727L106.048 91.3569C107.081 90.7916 107.943 89.9588 108.544 88.9458C109.145 87.9328 109.462 86.7769 109.463 85.5991V33.2538C109.462 32.0761 109.145 30.9201 108.544 29.9072C107.943 28.8942 107.081 28.0614 106.048 27.4961ZM105.085 85.5991C105.084 85.9911 104.978 86.3757 104.777 86.7126C104.577 87.0496 104.29 87.3266 103.946 87.5148L55.7824 113.884C55.4602 114.061 55.0989 114.153 54.7316 114.153C54.3643 114.153 54.003 114.061 53.6808 113.884L5.51695 87.5148C5.17308 87.3266 4.88603 87.0496 4.68578 86.7126C4.48553 86.3757 4.37942 85.9911 4.37853 85.5991V33.2538C4.37942 32.8619 4.48553 32.4773 4.68578 32.1404C4.88603 31.8034 5.17308 31.5264 5.51695 31.3382L53.6808 4.96855C54.002 4.78928 54.3637 4.69517 54.7316 4.69517C55.0995 4.69517 55.4612 4.78928 55.7824 4.96855L103.946 31.3382C104.29 31.5264 104.577 31.8034 104.777 32.1404C104.978 32.4773 105.084 32.8619 105.085 33.2538V85.5991Z" fill="white"/>
-                                <path d="M47.7453 42.2422L65.2129 59.7097L47.7453 77.1773" stroke="white" stroke-width="4.65801" stroke-linecap="round"/>
+                            <svg  v-if="loaded && !responsive" xmlns="http://www.w3.org/2000/svg" width="6.250rem" height="6.813rem" viewBox="0 0 110 119" fill="none">
+                                <path d="M106.048 27.1753L57.8841 0.805587C56.9175 0.276711 55.8334 -0.000488281 54.7316 -0.000488281C53.6298 -0.000488281 52.5457 0.276711 51.5791 0.805587L3.41525 27.1753C2.38203 27.7406 1.51983 28.5734 0.918971 29.5864C0.318115 30.5993 0.000708929 31.7553 0 32.933V85.2783C0.000708929 86.4561 0.318115 87.612 0.918971 88.625C1.51983 89.638 2.38203 90.4708 3.41525 91.0361L51.5791 117.406C52.5449 117.937 53.6293 118.216 54.7316 118.216C55.8339 118.216 56.9183 117.937 57.8841 117.406L106.048 91.0361C107.081 90.4708 107.943 89.638 108.544 88.625C109.145 87.612 109.462 86.4561 109.463 85.2783V32.933C109.462 31.7553 109.145 30.5993 108.544 29.5864C107.943 28.5734 107.081 27.7406 106.048 27.1753ZM105.085 85.2783C105.084 85.6703 104.978 86.0549 104.777 86.3918C104.577 86.7288 104.29 87.0058 103.946 87.194L55.7824 113.564C55.4602 113.74 55.0989 113.832 54.7316 113.832C54.3643 113.832 54.003 113.74 53.6808 113.564L5.51695 87.194C5.17308 87.0058 4.88603 86.7288 4.68578 86.3918C4.48553 86.0549 4.37942 85.6703 4.37853 85.2783V32.933C4.37942 32.5411 4.48553 32.1565 4.68578 31.8196C4.88603 31.4826 5.17308 31.2056 5.51695 31.0174L53.6808 4.64775C54.002 4.46848 54.3637 4.37437 54.7316 4.37437C55.0995 4.37437 55.4612 4.46848 55.7824 4.64775L103.946 31.0174C104.29 31.2056 104.577 31.4826 104.777 31.8196C104.978 32.1565 105.084 32.5411 105.085 32.933V85.2783Z" fill="white"/>
+                                <path d="M72 51.7439L54.5325 69.2114L37.0649 51.7439" stroke="white" stroke-width="4.65801" stroke-linecap="round"/>
                             </svg>
                         </Transition>
                     </h1>
@@ -53,7 +53,9 @@ export default {
         return {
             currentTranslate: 0,
             showRight: false,
-            count: 0,
+            countLeft: 0,
+            countRight: 0,
+            countGeneral: 0,
             doubled: false,
             isDragging: false,
             prevTranslate: 0,
@@ -93,22 +95,38 @@ export default {
         },
         translateToLeft(){
             let slide = document.querySelector('.slide')
-            console.log('clickei left', slide)
             this.currentTranslate += 333
             slide.style.transform = `translateX(${this.currentTranslate}px)`
-            this.count--
-            let left = slide.getBoundingClientRect().left
+            console.log(this.countLeft)
+            if(this.countRight > 0 && this.countGeneral > 0) {
+                let clicks = (this.countLeft > this.countGeneral ? this.countLeft - this.countGeneral : this.countGeneral - this.countLeft)
+                this.countRight = (this.countRight - clicks)
+                this.countGeneral++
+                this.countLeft = this.countGeneral
+                console.log('general:', this.countGeneral, 'esquerda:',this.countLeft)
                 this.verifyCurrentCountPosition()
+                return
+            }
+            this.countLeft++
+            this.countGeneral--
+            this.verifyCurrentCountPosition()
            
             
         },
         translateToRight(){
-            console.log('lado')
             let slide = document.querySelector('.slide')
             this.currentTranslate -= 333
             slide.style.transform = `translateX(${this.currentTranslate}px)`
-            let left = slide.getBoundingClientRect().left
-            this.count++
+            
+            if(this.countLeft > 0 && this.countGeneral > 0){
+                let clicks = (this.countRight > this.countGeneral ? this.countRight - this.countGeneral : this.countGeneral - this.countRight)
+                this.countLeft = (this.countLeft - clicks)
+                this.countGeneral++
+                this.countRight = this.countGeneral
+                this.verifyCurrentCountPosition()
+                return
+            }
+            this.countRight++
             this.verifyCurrentCountPosition()
   
 
@@ -135,14 +153,12 @@ export default {
         verifyCurrentCountPosition(){
             let slide = document.querySelector('.slide')
             let amount = this.projects.length
-            console.log(this.count)
             if(!this.doubled) amount *= 2
-            if(this.count <= 0) {
+            if(this.countGeneral < 0 || this.countLeft == amount) {
                 this.currentTranslate = 0
                 slide.style.transition = '0s'
                 slide.style.transitionDuraction = '0s'
-                console.log("funcionou?", slide.style.transition)
-                this.doubleArray()
+                if(!this.doubled) this.doubleArray() 
                 this.currentTranslate = this.currentTranslate -= (333 * amount / 2)
                 slide.style.transform =  `translateX(${this.currentTranslate}px)`
                 this.currentTranslate += 333
@@ -150,26 +166,26 @@ export default {
                     slide.style.transition = '0.3s'
                     slide.style.transform =  `translateX(${this.currentTranslate}px)`
                 }, 1);
-                this.count = (amount / 2)
-                console.log(this.count, amount)
+                this.countLeft = (amount / 2)
+                this.countRight = (amount / 2)
+                this.countGeneral = (amount / 2)
                 return
             }
-            if(this.count >= (this.projects.length - 3)){
-                console.log((333 * amount / 2) - 499.5)
+            if(this.countRight >= (this.projects.length - 3)){
                 this.currentTranslate = 0 - ((333 * amount / 2) - (333* 4))
                 slide.style.transition = '0s'
                 slide.style.transitionDuraction = '0s'
-                console.log("funcionou?", slide.style.transition)
-                this.doubleArray()
+                if(!this.doubled) this.doubleArray()
                 //this.currentTranslate = this.currentTranslate -= (333 * amount / 2)
                 slide.style.transform =  `translateX(${this.currentTranslate}px)`
                 this.currentTranslate -= 333
                 setTimeout(() => {
                     slide.style.transition = '0.3s'
                     slide.style.transform =  `translateX(${this.currentTranslate}px)`
-                }, 1);
-                this.count = (amount / 2) - 3
-                console.log(this.count, amount)
+                }, 3);
+                this.countRight = (amount / 2) - 3
+                this.countLeft = (amount / 2) 
+                this.countGeneral = (amount / 2) - 3
                 return
             }
         },
@@ -262,13 +278,13 @@ export default {
 
 .seta-left {
     position: absolute;
-    left:  0;
+    left:  0.5%;
     top: 50%;
     
 }
 .seta-right {
     position: absolute;
-    right: 0;
+    right: 0.5%;
     top: 50%;
 }
 .svgAnimation-enter-active {
