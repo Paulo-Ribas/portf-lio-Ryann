@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import vueScreen from 'vue-screen'
-import VueMetaApp from 'vue-meta'
 
 const app = createApp(App)
 

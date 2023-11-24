@@ -274,13 +274,13 @@ export default {
 
 .seta-left {
     position: absolute;
-    left:  0.5%;
+    left:  1%;
     top: 50%;
     
 }
 .seta-right {
     position: absolute;
-    right: 0.5%;
+    right: 1%;
     top: 50%;
 }
 .svgAnimation-enter-active {
