@@ -100,7 +100,6 @@ export default {
             if(this.countRight > 0 && this.countGeneral > 0) {
                 this.countLeft++
                 this.countRight--
-                console.log(`estou indo para a esquerda, e a esquerda tem : ${this.countLeft} e a direita tem: ${this.countRight} e a quantidade desejada é ${this.projects.length}`)
                 this.verifyCurrentCountPosition()
                 return
             }
@@ -118,7 +117,6 @@ export default {
             if(this.countLeft > 0 && this.countGeneral > 0){
                 this.countRight++
                 this.countLeft--
-                console.log(`estou indo para a direita, e a esquerda tem : ${this.countLeft} e a direita tem: ${this.countRight} e a quantidade desejada é ${this.projects.length - 3}`)
                 this.verifyCurrentCountPosition()
                 return
             }
