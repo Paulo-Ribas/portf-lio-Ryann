@@ -318,6 +318,28 @@ export default {
     }
     
 }
+@media screen and (max-width: 870px) {
+    .description-container {
+        padding-top: 0%;
+        align-items: center;
+    }
+    .title {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 0%;
+        align-items: center;
+
+    }
+  .description-container p {
+    padding: 10px 10px;
+    font-size: 1.5rem;
+    max-width: 300px;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+}
 @media screen and (max-width: 556px) {
     .wrapper {
         flex-direction: column;
@@ -375,28 +397,7 @@ export default {
     max-height: 316px;
     overflow-y: auto;
 }
-@media screen and (max-width: 870px) {
-    .description-container {
-        padding-top: 0%;
-        align-items: center;
-    }
-    .title {
-        flex: 1;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        padding-top: 0%;
-        align-items: center;
 
-    }
-  .description-container p {
-    padding: 10px 10px;
-    font-size: 1.5rem;
-    max-width: 300px;
-    max-height: 240px;
-    overflow-y: auto;
-  }
-}
     
 }
 </style>

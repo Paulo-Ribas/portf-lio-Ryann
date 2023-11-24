@@ -340,6 +340,25 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 .H2Show-enter-to {
     opacity: 1;
 }
+@media screen and (max-width: 870px) {
+    .form-container {
+        flex: 1;
+        width: 90%;
+        max-width: 500px;
+    } 
+    .wrapper {
+        padding-top: 15px;
+    }
+    form {
+        height: 85%;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        width: 100%;
+        padding-bottom: 5px;
+    }   
+
+}
 @media screen and (max-width: 556px) {
     #home h2 {
         font-size: 1.9rem;
@@ -388,23 +407,5 @@ input[type='submit'] {
 } 
     
 }
-@media screen and (max-width: 870px) {
-    .form-container {
-        flex: 1;
-        width: 90%;
-        max-width: 500px;
-    } 
-    .wrapper {
-        padding-top: 15px;
-    }
-    form {
-        height: 85%;
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-        width: 100%;
-        padding-bottom: 5px;
-    }   
 
-}
 </style>
