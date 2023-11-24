@@ -340,6 +340,7 @@ input[type='text']::placeholder, input[type='email']::placeholder{
 .H2Show-enter-to {
     opacity: 1;
 }
+
 @media screen and (max-width: 870px) {
     .form-container {
         flex: 1;
@@ -359,6 +360,7 @@ input[type='text']::placeholder, input[type='email']::placeholder{
     }   
 
 }
+
 @media screen and (max-width: 556px) {
     #home h2 {
         font-size: 1.9rem;
@@ -393,6 +395,9 @@ input[type='submit'] {
     max-width: 500px;
     padding-top: 5px;
 }
+form {
+    gap: 15px;
+}
 .name-container {
     width: 100%;
     display: flex;
@@ -407,5 +412,6 @@ input[type='submit'] {
 } 
     
 }
+
 
 </style>

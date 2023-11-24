@@ -276,6 +276,19 @@ img {
     }
     
 }
+@media screen and (max-width: 870px) {
+  .title, .img-container {
+    padding-top: 0%;
+    align-items: center;
+  }
+  .title h1 {
+    text-align: center;
+  }
+  .img-container img {
+    max-height: 90%;
+    max-width: 58%;
+  }
+}
 @media screen and (max-width: 556px) {
     .wrapper {
         flex-direction: column;
@@ -326,17 +339,5 @@ img {
     }
     
 }
-@media screen and (max-width: 870px) {
-  .title, .img-container {
-    padding-top: 0%;
-    align-items: center;
-  }
-  .title h1 {
-    text-align: center;
-  }
-  .img-container img {
-    max-height: 90%;
-    max-width: 58%;
-  }
-}
+
 </style>
