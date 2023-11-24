@@ -66,15 +66,17 @@ export default {
         }
     },
     mounted(){
-        this.startSmallTextAnimation()
-        setTimeout(()=> {
-            this.verifyIntervals()
-        }, (this.timing + 50) * this.fullWords.length)
-        
         this.loaded = true
+        this.words = this.fullWords.split('')
+        let timeout = setTimeout(() => {
+            this.startSmallTextAnimation()
+            return timeout
+        }, 1400);
+        this.tout = timeout
     },
     beforeUnmount(){
         clearInterval(this.intervalAnimation)
+        clearTimeout(this.tout)
     },
     watch: {
         '$screen.width'(value){
@@ -93,28 +95,30 @@ export default {
         startSmallTextAnimation(){
             let interval = setInterval(() => {
                 this.smallTextAnimation()
-                this.currentIndex++
                 return interval
             }, this.timing);
             this.intervalAnimation = interval
         },
         smallTextAnimation(){
-            let fullWordsSplit = this.fullWords.split('')
-            let wordCurrentIndex = this.words[this.currentIndex]
-            if(!wordCurrentIndex && fullWordsSplit[this.currentIndex]){
-                this.words.push(fullWordsSplit[this.currentIndex])
-                if(fullWordsSplit.length === this.words.length) return clearInterval(this.intervalAnimation)
+            try {
+                let spans = this.addClassShowUp('small span', this.currentIndex)
+                if(spans.length === this.currentIndex) return clearInterval(this.intervalAnimation)
+                this.currentIndex++
+                
+            } catch (error) {
+                clearInterval(this.intervalAnimation)
             }
         },
-        verifyIntervals(){
-            setTimeout(()=> {
-                if(this.fullWords.length === this.words.length){
-                    clearInterval(this.intervalAnimation)
-                    return
-                }  
-                this.verifyIntervals()
-            }, 5500)
-        },
+        addClassShowUp(element, index){
+            try {
+                let spans = Array.from(document.querySelectorAll(element))
+                spans[index].classList.add('showUp')
+                return spans
+            }
+            catch(err){
+                throw err
+            }
+        }    
     }
 
 }
@@ -155,6 +159,9 @@ export default {
     word-spacing: 0px;
     -webkit-text-stroke: 0px;
     line-height: 2rem;
+}
+small span {
+    opacity: 0;
 }
 .shadow {
     background-color: #181818;
@@ -254,7 +261,21 @@ img {
     z-index: 0;
     width: 100%;
 }
+.showUp {
+    transition: 0.1s;
+    animation: opacity;
+    animation-fill-mode: forwards;
+}
 
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+    
+}
 @media screen and (max-width: 556px) {
     .wrapper {
         flex-direction: column;

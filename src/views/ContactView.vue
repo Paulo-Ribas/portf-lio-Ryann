@@ -401,7 +401,7 @@ input[type='submit'] {
         height: 85%;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 3px;
         width: 100%;
         padding-bottom: 5px;
     }   

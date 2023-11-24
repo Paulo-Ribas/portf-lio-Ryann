@@ -29,7 +29,7 @@
                         <TransitionGroup name="Opacity">
                             <span v-for="(text, index) in text1" :key="index">{{text}}</span>
                             <span v-for="(text, index) in text2" :key="index">{{text}}</span>
-                            <RouterLink v-if="showContact" key="33" to="/contact">
+                            <RouterLink key="33" to="/contact">
                                 <TransitionGroup name="Opacity">
                                     <span v-for="(text, index) in linkRouter" :key="index">{{text}}</span>
                                 </TransitionGroup>
@@ -73,7 +73,7 @@ export default {
             intervalAnimation1: undefined,
             intervalAnimation2: undefined,
             intervalAnimation3: undefined,
-            timing: 25,
+            timing: 23,
             loaded: false,
             showContact: false,
             responsive: false,
@@ -110,17 +110,53 @@ export default {
         startAllTextAnimations(){
             let intervalAnimation1 = setInterval(()=> {
                 this.animationCascate1()
+                return intervalAnimation1
             }, this.timing)
             this.intervalAnimation1 = intervalAnimation1
         },
         animationCascate1(){
-            let spans = Array.from(document.querySelectorAll('p span'))
-            spans[this.currentIndexText1].classList.add('showUp')
-            if(this.currentIndexText1 + 1 === spans.length) {
-                clearInterval(this.intervalAnimation1s)
+            try {
+                let spans = this.addClassShowUp('p span', this.currentIndexText1)
+                if(this.currentIndexText1 === spans.length) {
+                    clearInterval(this.intervalAnimation1)
+                    let interval = setInterval(() => {
+                        this.animationCascate2()
+                        return interval
+                    }, this.timing)
+                    this.intervalAnimation3 = interval
+                    return
+                }
+                this.currentIndexText1++
             }
-            this.currentIndexText1++
-        }   
+            catch(err){
+                console.log(err)
+                clearInterval(this.intervalAnimation1)
+            }
+        },
+        animationCascate2(){
+            try {
+                let spans = this.addClassShowUp('p a span', this.currentIndexText3)
+                if(this.currentIndexText3 === spans.length) {
+                    clearInterval(this.intervalAnimation3)
+                    return
+                }
+                this.currentIndexText3++
+            }
+            catch(err) {
+                console.log(err)
+                clearInterval(this.intervalAnimation3)
+            }
+        },
+        addClassShowUp(element, index){
+            try {
+                let spans = Array.from(document.querySelectorAll(element))
+                spans[index].classList.add('showUp')
+                return spans
+            }
+            catch(err){
+                throw err
+            }
+        }    
     },
 
 }
