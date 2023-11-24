@@ -150,7 +150,7 @@ export default {
             let slide = document.querySelector('.slide')
             let amount = this.projects.length
             if(!this.doubled) amount *= 2
-            if(this.countGeneral < 0 || this.countLeft == amount - 3) {
+            if(this.countGeneral < 0 || this.countLeft == amount) {
                 this.currentTranslate = 0
                 slide.style.transition = '0s'
                 slide.style.transitionDuraction = '0s'
@@ -163,7 +163,7 @@ export default {
                     slide.style.transform =  `translateX(${this.currentTranslate}px)`
                 }, 1);
                 this.countLeft = (amount / 2)
-                this.countRight = (amount / 2)
+                this.countRight = (amount / 2) - 1
                 this.countGeneral = (amount / 2)
                 return
             }
@@ -180,7 +180,7 @@ export default {
                     slide.style.transform =  `translateX(${this.currentTranslate}px)`
                 }, 3);
                 this.countRight = (amount / 2) - 3
-                this.countLeft = (amount / 2)
+                this.countLeft = (amount / 2) + 2
                 this.countGeneral = (amount / 2) - 3
                 return
             }
