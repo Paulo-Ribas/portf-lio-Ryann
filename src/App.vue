@@ -152,7 +152,7 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 870px) {
   nav li a {
     font-size: 1.8rem;
   }

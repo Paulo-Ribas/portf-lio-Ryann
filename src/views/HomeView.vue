@@ -318,12 +318,25 @@ img {
         display: flex;
     }
     .img-container img {
-        width: 70%;
+        width: 60%;
     }
     
     .SecondText-enter-active {
     transition: 0.7s;
     }
     
+}
+@media screen and (max-width: 870px) {
+  .title, .img-container {
+    padding-top: 0%;
+    align-items: center;
+  }
+  .title h1 {
+    text-align: center;
+  }
+  .img-container img {
+    max-height: 90%;
+    max-width: 58%;
+  }
 }
 </style>
