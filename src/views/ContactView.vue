@@ -17,22 +17,22 @@
                             <div class="name-container">
                                 <div class="first-name">
                                     <label>Seu nome*</label>
-                                    <input id="name" name="name" type="text" placeholder="Pedro">
+                                    <input id="name" name="name" v-model="name" type="text" placeholder="Pedro">
                                 </div>
                                 <div class="second-name">
                                     <label for="secondname">Seu sobrenome*</label>
-                                    <input id="secondname" name="secondname" type="text" placeholder="Silva">
+                                    <input id="secondname" v-model="secondName" name="secondname" type="text" placeholder="Silva">
                                 </div>
                             </div>
                             <div class="email-container">
                                 <label for="email">Email*</label>
-                                <input id="email" name="email" type="text" placeholder="pedrosilva@gmail.com">
+                                <input id="email" v-model="email" name="email" type="text" placeholder="pedrosilva@gmail.com">
                             </div>
                             <div class="mensagem">
                                 <label for="mensagem">Mensagem*</label>
-                                <textarea id="mensagem" placeholder="Escreva Aqui Sua Mensagem"></textarea>
+                                <textarea v-model="menssagem" id="mensagem" placeholder="Escreva Aqui Sua Mensagem"></textarea>
                             </div>
-                            <input type="submit" id="submit" value="Enviar mensagem">
+                            <input type="submit" id="submit" value="Enviar mensagem" @click.prevent="sendForm()">
                         </form>
                     </Transition>
                 </div>
@@ -79,6 +79,14 @@ export default {
             loaded: false,
             h2Temp: true,
             responsive: false,
+            name: '',
+            secondName: '',
+            email: '',
+            menssagem: '',
+            successed: false,
+            error: false,
+            errormsg: '',
+            url: 'https://33bits.tech/EmailRyan/email/'
         }
     },
     watch:{
@@ -120,6 +128,43 @@ export default {
                 }   
                 this.verifyIntervals()
             }, 5500)
+        },
+        sendForm(){
+            let options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name:this.name, secondName: this.secondName, email: this.email, menssagem: this.menssagem})
+            }
+
+            fetch(this.url, options).then(response => {
+                if(!response.ok) {
+                    this.error = true
+                    throw response.json()
+                }
+                return response.json()
+            }).then(done => {
+                this.successed = true
+                this.error = false
+                this.errormsg = false,
+                this.successed = true
+                this.email = ''
+                this.name = ''
+                this.secondName = ''
+                this.menssagem = ''
+                setTimeout(() => {
+                    this.successed = false
+                },1000)
+            }).catch(err => {
+                Promise.resolve(err).then(data => {
+                    this.errormsg = data.err
+                    this.error = true
+                    setTimeout(() => {
+                        this.error = false
+                    }, 1000);
+                })
+            })
         },
     }
 
