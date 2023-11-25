@@ -51,13 +51,15 @@ export default {
     beforeMount(){
         this.setResponsive()
     },
-    metaInfo: {
-        title: 'Sobre Mim',
-        meta: [
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: 'Aqui você descobre mais sobre mim, o compromisso com o Design e o motivo por eu ter escolhido essa área' },
-        ],
-        
+    head(){
+        return {
+            title: 'Sobre Mim',
+            meta: [
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+                { hid: 'description', name: 'description', content: 'Aqui você descobre mais sobre mim, o compromisso com o Design e o motivo por eu ter escolhido essa área' },
+
+            ],
+        }
     },
     data(){
         return {

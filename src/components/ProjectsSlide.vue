@@ -107,4 +107,12 @@ export default {
         transform: scale(1.1);
     }
 
+    @media screen and (max-width: 556px) {
+        .slide-container {
+            width: calc(98% - 53px);
+
+        }
+        
+    }
+
 </style>
