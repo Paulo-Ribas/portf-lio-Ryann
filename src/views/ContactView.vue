@@ -83,7 +83,7 @@ export default {
     },
     head(){
         return {
-            title: 'Sobre Mim',
+            title: 'Contato',
             meta: [
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                 { hid: 'description', name: 'description', content: 'Entre em contato comigo para solicitar serviços.'},
@@ -340,6 +340,17 @@ textarea {
 textarea::placeholder {
     color: #C5C5C5;
 }
+textarea::-webkit-scrollbar {
+    width: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: black;
+}
+textarea::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 4px;
+}
 
 .whats {
     flex: 0.2;
@@ -532,6 +543,8 @@ form {
     opacity: 0;
     transform: translate(50%, 50%);
 }
+
+
 
 
 </style>
