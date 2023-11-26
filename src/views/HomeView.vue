@@ -54,6 +54,15 @@ export default {
     beforeMount(){
         this.setResponsive()
     },
+    head(){
+        return {
+            title: 'Portifólio',
+            meta: [
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+
+            ],
+        }
+    },
     data(){
         return {
             words: [],

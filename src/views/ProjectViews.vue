@@ -46,6 +46,16 @@ export default {
     beforeMount(){
         this.setResponsive()
     },
+    head(){
+        return {
+            title: 'Sobre Mim',
+            meta: [
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+                { hid: 'description', name: 'description', content: 'Obtenha o melhor design para suas necessidades . Oferecemos uma variedade de serviços, incluindo design e desenvolvimento de sites, landing page, interfaces de aplicativos, logotipos, cartões de visitas, banners e outras peças gráficas. Não se contente com um serviço abaixo da média; confie em nós para obter um design de alta qualidade personalizado para atender às suas necessidades.' },
+
+            ],
+        }
+    },
     mounted(){
         this.loaded = true
     },

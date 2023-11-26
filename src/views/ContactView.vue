@@ -3,6 +3,16 @@
         <div class="shadow"></div>
         <div class="container">
             <div class="wrapper">
+                <TransitionGroup name="emailStatus">
+                    <div class="email-error" v-if="error">
+                        <Error></Error>
+                        <span>{{errormsg}}</span>
+                    </div>
+                    <div class="email-success" v-if="successed">
+                        <Successed></Successed>
+                        <span>Email enviado com sucesso</span>
+                    </div>
+                </TransitionGroup>
                 <div class="form-container">
                     <!-- <h2 v-if="h2Temp" style="opacity: 0;">Fale Comigo.</h2> -->
                 <!-- <Transition name="H2Show">
@@ -53,8 +63,10 @@
 </template>
 <script>
 import Whats from '../components/icons/Whats.vue'
+import Successed from '../components/icons/Successed.vue'
+import Error from '../components/icons/Error.vue'
 export default {
-    components: {Whats},
+    components: {Whats, Successed, Error},
     beforeMount(){
         this.setResponsive()
     },
@@ -68,6 +80,16 @@ export default {
     },
     beforeUnmount(){
         clearInterval(this.intervalAnimation)
+    },
+    head(){
+        return {
+            title: 'Sobre Mim',
+            meta: [
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+                { hid: 'description', name: 'description', content: 'Entre em contato comigo para solicitar serviços.'},
+
+            ],
+        }
     },
     data(){
         return { 
@@ -155,14 +177,15 @@ export default {
                 this.menssagem = ''
                 setTimeout(() => {
                     this.successed = false
-                },1000)
+                },3000)
             }).catch(err => {
                 Promise.resolve(err).then(data => {
                     this.errormsg = data.err
+                    if(!data.err) this.errormsg = 'Ocorreu Um Erro No Servidor'
                     this.error = true
                     setTimeout(() => {
                         this.error = false
-                    }, 1000);
+                    }, 3000);
                 })
             })
         },
@@ -230,7 +253,38 @@ label {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
+.email-error, .email-success {
+    display: inline-flex;
+    padding: 10px;
+    align-items: center;
+    gap: 13px;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 3;
+    transform: translate(-50%, 50%);
+
+}
+.email-error span , .email-success span {
+    font-weight: bold;
+    font-family: Inter;
+
+}
+.email-error {
+    border: 1px solid #F00;
+    background: #F00;
+}
+.email-success {
+    border-radius: 20px;
+    border: 1px solid #0DA400;
+    background: #0DA400;
+}
+
 .form-container {
     flex: 1;
     max-width: 500px;
@@ -386,6 +440,7 @@ input[type='text']::placeholder, input[type='email']::placeholder{
     opacity: 1;
 }
 
+
 @media screen and (max-width: 870px) {
     .form-container {
         flex: 1;
@@ -456,6 +511,26 @@ form {
     
 } 
     
+}
+.emailStatus-enter-active, .emailStatus-leave-active {
+    transition: 0.3s;
+    transition-delay: 0.1s;
+}
+.emailStatus-enter-from {
+    opacity: 0;
+    transform: translate(-100%, 50%);
+}
+.emailStatus-enter-to {
+    opacity: 1;
+    transform: translate(-50%, 50%);
+}
+.emailStatus-leave-from {
+    opacity: 1;
+    transform: translate(-50%, 50%);
+}
+.emailStatus-leave-to {
+    opacity: 0;
+    transform: translate(50%, 50%);
 }
 
 
