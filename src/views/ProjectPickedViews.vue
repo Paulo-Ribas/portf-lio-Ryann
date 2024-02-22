@@ -131,6 +131,10 @@ export default {
                     projectArray = ['project11/1.png', 'project11/2.png', 'project11/3.png']
                     this.projectImg = new URL(`../assets/img/project11/${param}.png`, import.meta.url).href
                     break;
+                case 'Goldentimes':
+                    projectArray = ['project12/1.png', 'project12/2.png', 'project12/3.png', 'project12/4.png', 'project12/5.png',]
+                    this.projectImg = new URL(`../assets/img/project12/${param}.png`, import.meta.url).href
+                    break;
 
             }
             return projectArray;

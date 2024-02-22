@@ -84,6 +84,9 @@ export default {
             {name: 'ryanng', img: new URL('../assets/img/project9/1.png', import.meta.url).href, number: '1'},
             {name: 'Amigitos', img: new URL('../assets/img/project10/3.png', import.meta.url).href, number: '3'},
             {name: 'Musicas', img: new URL('../assets/img/project11/3.png', import.meta.url).href, number: '3'},
+            {name: 'Goldentimes', img: new URL('../assets/img/project12/6.png', import.meta.url).href, number: '6'},
+
+    
             
         ],
         
