@@ -78,7 +78,7 @@ export default {
             {name:'cardPauloRibas', img: new URL('../assets/img/project2/2.png', import.meta.url).href, number: '2'},
             {name: 'musiQo', img: new URL('../assets/img/project4/1.png', import.meta.url).href, number: '1'},
             {name: 'lanches budega', img: new URL('../assets/img/project5/1.png', import.meta.url).href, number: '1'},  
-            {name: 'BarberShop', img: new URL('../assets/img/project6/1.png', import.meta.url).href, number: '1'},
+            {name: 'PHBShow', img: new URL('../assets/img/project6/1.png', import.meta.url).href, number: '1'},
             {name: 'Beth', img: new URL('../assets/img/project7/1.png', import.meta.url).href, number: '1'},
             {name: 'Melissa', img: new URL('../assets/img/project8/1.png', import.meta.url).href, number: '1'},
             {name: 'ryanng', img: new URL('../assets/img/project9/1.png', import.meta.url).href, number: '1'},
